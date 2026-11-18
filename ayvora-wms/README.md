@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AYVORA - Ayla Innovation Warehouse
 
-## Getting Started
+Warehouse Management System (WMS) berbasis web untuk distributor perlengkapan dan kemasan F&B ramah lingkungan. Proyek Final Project Praktikum Pemrograman Web 2026.
 
-First, run the development server:
+## Teknologi
+
+| Komponen | Teknologi |
+|---|---|
+| Framework | Next.js (App Router) |
+| Bahasa | JavaScript (JSX) |
+| Styling | Tailwind CSS |
+| Font | Poppins (`next/font/google`) |
+| Database | PostgreSQL + raw SQL *(tahap berikutnya)* |
+| Backend | Route Handlers & Server Actions *(tahap berikutnya)* |
+| Autentikasi | Better Auth *(tahap berikutnya)* |
+
+## Menjalankan project
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka http://localhost:3000.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Status pengerjaan
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [x] Tahap 1 - Fondasi project dan landing page (Beranda, Tentang Kami)
+- [ ] Tahap 2 - Database PostgreSQL, dummy data, autentikasi
+- [ ] Tahap 3 - Dashboard Admin, Warehouse Manager, Staff Gudang, Supplier
 
-## Learn More
+## Struktur folder
 
-To learn more about Next.js, take a look at the following resources:
+```text
+public/            aset statis (logos, images/backgrounds, images/products)
+src/
+  app/
+    layout.jsx     root layout: font Poppins + metadata
+    globals.css    token warna (light/dark) + pemetaan ke Tailwind
+    (landing)/     halaman publik: layout bersama, Beranda, /about
+  components/
+    landing/       navbar, hero, about, footer, background
+    shared/        komponen kecil yang dipakai ulang (ikon)
+  lib/             konstanta dan helper
+database/          file .sql (dibuat pada tahap backend, di luar src/app)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Aturan kode
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Elemen | Format | Contoh |
+|---|---|---|
+| Folder & file | kebab-case | `hero-section.jsx` |
+| Komponen React | PascalCase | `HeroSection` |
+| Function & variable | camelCase | `handleNavigation` |
+| Constant | UPPER_SNAKE_CASE | `NAV_ITEMS` |
+| Tabel & kolom database | snake_case | `restock_orders` |
 
-## Deploy on Vercel
+Nama kode memakai Bahasa Inggris, teks antarmuka memakai Bahasa Indonesia.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Sistem tema
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Semua warna didefinisikan sekali di `src/app/globals.css` sebagai CSS variable
+(`--background`, `--foreground`, `--primary`, `--secondary`, dst.) lalu dipakai di komponen
+lewat nama semantik, misalnya `bg-background text-foreground`. Tidak ada kode hex di JSX.
+Dark mode aktif bila `<html>` memiliki class `dark`.
+
+Di layar `lg` ke atas, ukuran memakai satuan desain `--u` (1 unit = 1px pada frame desain 1512px)
+sehingga proporsi mengikuti desain referensi, contoh: `lg:text-[length:calc(62.7*var(--u))]`.
