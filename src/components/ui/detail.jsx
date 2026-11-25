@@ -1,5 +1,6 @@
 import { idText, statusLabel } from "@/lib/labels";
 import { Card, CardHeader } from "@/components/ui/card";
+import { PhotoLink } from "@/components/ui/photo-viewer";
 import { Icon } from "@/components/shared/icons";
 import { formatDateTime } from "@/lib/format";
 import { cn } from "@/lib/cn";
@@ -15,15 +16,15 @@ export function Info({ label, children, className }) {
   );
 }
 
-// Foto bukti: thumbnail yang membuka gambar asli di tab baru
+// Foto bukti: thumbnail yang membuka gambar besar di halaman, dengan tombol Kembali
 export function Photo({ src, alt = "Foto bukti", className, label }) {
   if (!src) return null;
   return (
-    <a href={src} target="_blank" rel="noreferrer" className={cn("group inline-flex flex-col gap-1", className)}>
+    <PhotoLink src={src} alt={alt} className={cn("group inline-flex cursor-pointer flex-col items-start gap-1", className)}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={src} alt={alt} className="size-24 rounded-xl border border-border bg-muted object-cover transition group-hover:opacity-80" />
       {label && <span className="text-xs text-muted-foreground">{label}</span>}
-    </a>
+    </PhotoLink>
   );
 }
 

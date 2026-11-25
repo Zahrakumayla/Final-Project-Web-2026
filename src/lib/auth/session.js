@@ -30,7 +30,9 @@ export async function startSession(userId) {
   const cookieStore = await cookies();
   cookieStore.set(SESSION_COOKIE_NAME, token, {
     httpOnly: true, // tidak bisa dibaca JavaScript di browser
-    secure: process.env.NODE_ENV === "production", // HTTPS saja saat production
+    // Cookie "secure" hanya jalan di HTTPS. Bila production dijalankan lewat http (mis. HP lewat IP jaringan),
+    // isi COOKIE_SECURE=false di .env supaya login tetap bisa.
+    secure: process.env.COOKIE_SECURE ? process.env.COOKIE_SECURE === "true" : process.env.NODE_ENV === "production",
     sameSite: "lax", // cookie tidak ikut terkirim pada POST lintas situs
     path: "/",
     expires: expiresAt,

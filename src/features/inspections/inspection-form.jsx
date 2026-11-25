@@ -1,5 +1,6 @@
 "use client";
 
+import { PhotoLink } from "@/components/ui/photo-viewer";
 import { useActionState, useState } from "react";
 import { submitInspectionAction } from "@/actions/inspections";
 import { Icon } from "@/components/shared/icons";
@@ -101,12 +102,13 @@ export function InspectionForm({ inspectionId, expected, current, currentMismatc
                   </span>
                 )}
               </div>
-              <div className="grid gap-3 sm:grid-cols-5">
+              <div className="grid grid-cols-2 items-start gap-3 sm:grid-cols-3 lg:grid-cols-5">
                 <FormField id={`g-${index}`} label="Baik"><Input id={`g-${index}`} name={name("goodQty")} inputMode="numeric" value={row.goodQty} onChange={(e) => setGood(index, e.target.value, exp.ordered_qty)} /></FormField>
                 <FormField id={`d-${index}`} label="Rusak"><Input id={`d-${index}`} name={name("damagedQty")} inputMode="numeric" value={row.damagedQty} onChange={(e) => setDamaged(index, e.target.value, exp.ordered_qty)} /></FormField>
                 <FormField id={`s-${index}`} label="Kurang"><Input id={`s-${index}`} name={name("shortageQty")} inputMode="numeric" value={row.shortageQty} onChange={(e) => setShortage(index, e.target.value, exp.ordered_qty)} /></FormField>
-                <FormField id={`r-${index}`} label="Diterima (otomatis)">
-                  <Input id={`r-${index}`} value={received === null ? "-" : received} readOnly tabIndex={-1} />
+                <FormField id={`r-${index}`} label="Diterima">
+                  <Input id={`r-${index}`} value={received === null ? "-" : received} readOnly tabIndex={-1} title="Dihitung otomatis: Baik + Rusak" className="cursor-default bg-muted font-semibold" />
+                  <p className="mt-1 text-xs text-muted-foreground">Baik + Rusak</p>
                   <input type="hidden" name={name("receivedQty")} value={received === null ? "" : received} />
                 </FormField>
                 <FormField id={`k-${index}`} label="Rak tujuan">
@@ -124,7 +126,7 @@ export function InspectionForm({ inspectionId, expected, current, currentMismatc
                 <div>
                   <span className="mb-1.5 block text-sm font-medium">Foto bukti{damaged > 0 ? " (wajib)" : ""}</span>
                   <input type="file" name={name("photo")} accept="image/jpeg,image/png" className={FILE_CLASS} />
-                  {cur?.photo_url && <a href={cur.photo_url} target="_blank" rel="noreferrer" className="mt-1 block text-xs text-primary hover:underline">Foto sebelumnya tersimpan (biarkan kosong untuk memakai)</a>}
+                  {cur?.photo_url && <PhotoLink src={cur.photo_url} className="mt-1 block cursor-pointer text-left text-xs text-primary hover:underline">Lihat foto sebelumnya (biarkan kosong untuk memakai)</PhotoLink>}
                 </div>
               </div>
               {error && <p role="alert" className="mt-2 text-xs font-medium text-destructive">{error}</p>}
@@ -168,7 +170,7 @@ export function InspectionForm({ inspectionId, expected, current, currentMismatc
                 <div>
                   <span className="mb-1.5 block text-sm font-medium">Foto bukti (wajib)</span>
                   <input type="file" name={name("photo")} accept="image/jpeg,image/png" className={FILE_CLASS} />
-                  {m.keepPhoto && <a href={m.keepPhoto} target="_blank" rel="noreferrer" className="mt-1 block text-xs text-primary hover:underline">Foto sebelumnya tersimpan</a>}
+                  {m.keepPhoto && <PhotoLink src={m.keepPhoto} className="mt-1 block cursor-pointer text-left text-xs text-primary hover:underline">Lihat foto sebelumnya</PhotoLink>}
                 </div>
                 <FormField id={`mn-${index}`} label="Catatan (wajib)" className="sm:col-span-2">
                   <Input id={`mn-${index}`} name={name("note")} value={m.note} onChange={(e) => updateMismatch(index, { note: e.target.value })} />

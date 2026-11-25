@@ -1,5 +1,6 @@
 "use client";
 
+import { PhotoLink } from "@/components/ui/photo-viewer";
 import { useState } from "react";
 import { Icon } from "@/components/shared/icons";
 
@@ -41,7 +42,9 @@ export function ImagePicker({ name = "image", label = "Gambar", required = false
         <div className="flex size-24 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-muted text-muted-foreground">
           {shown ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={shown} alt="Pratinjau gambar" className="size-full object-cover" />
+            <PhotoLink src={shown} alt="Pratinjau gambar" className="size-full cursor-pointer">
+              <img src={shown} alt="Pratinjau gambar" className="size-full object-cover" />
+            </PhotoLink>
           ) : (
             <Icon name="image" className="size-8" />
           )}

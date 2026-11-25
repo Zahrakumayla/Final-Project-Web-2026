@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Icon } from "@/components/shared/icons";
 import { SidebarNav } from "@/components/layout/sidebar-nav";
 
@@ -27,7 +28,9 @@ export function MobileMenu({ items, brand }) {
         <Icon name="menu" className="size-5" />
       </button>
 
-      {open && (
+      {/* Laci dirender di <body> (portal). Header memakai backdrop-blur, yang membuat elemen "fixed" di dalamnya
+          hanya setinggi header sehingga menu terpotong dan tidak bisa diklik. */}
+      {open && createPortal(
         <div className="fixed inset-0 z-50 lg:hidden">
           <button type="button" aria-label="Tutup menu" onClick={() => setOpen(false)} className="absolute inset-0 bg-black/50" />
           <aside role="dialog" aria-modal="true" aria-label="Menu navigasi" className="absolute inset-y-0 left-0 flex w-72 max-w-[85vw] flex-col gap-6 overflow-y-auto bg-surface p-5 shadow-card">
@@ -39,7 +42,8 @@ export function MobileMenu({ items, brand }) {
             </div>
             <SidebarNav items={items} onNavigate={() => setOpen(false)} />
           </aside>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   );
