@@ -5,7 +5,7 @@
 
 AYVORA (Ayla Innovation Warehouse) merupakan sistem manajemen gudang berbasis web (*Warehouse Management System*) yang dirancang untuk membantu distributor perlengkapan dan kemasan F&B ramah lingkungan dalam mengelola aktivitas pergudangan secara terintegrasi, terstruktur, dan efisien.
 
-AYVORA membantu pengelolaan persediaan barang, transaksi barang masuk dan keluar, data supplier, customer, serta aktivitas operasional gudang melalui satu platform.
+AYVORA membantu pengelolaan persediaan barang, transaksi barang masuk dan keluar, data supplier serta aktivitas operasional gudang melalui satu platform.
 
 > 📌 Project ini dibuat sebagai bagian dari Final Project Praktikum Pemrograman Web 2026.
 
