@@ -303,20 +303,6 @@ http://localhost:3000
 
 ---
 
-## Pengujian Integritas Database
-
-AYVORA menyediakan file pengujian integritas database untuk membantu memeriksa constraint dan konsistensi transaksi pada database.
-
-File pengujian:
-
-```text
-database/tests/db-integrity-test.sql
-```
-
-Jalankan file tersebut melalui PostgreSQL atau pgAdmin setelah database selesai dikonfigurasi.
-
----
-
 ## Informasi Proyek
 
 | Informasi | Keterangan |
