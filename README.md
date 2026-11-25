@@ -242,12 +242,6 @@ Ikuti langkah-langkah berikut untuk menjalankan AYVORA di lingkungan lokal.
 git clone https://github.com/USERNAME/REPOSITORY.git
 ```
 
-Masuk ke direktori proyek:
-
-```bash
-cd ayvora
-```
-
 ### 2. Install Dependencies
 
 ```bash
